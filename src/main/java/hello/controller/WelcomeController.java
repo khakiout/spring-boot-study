@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/welcome")
 public class WelcomeController {
 
-	@RequestMapping(value="/welcome", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public String welcome(
 			@RequestParam(value = "name", defaultValue = "Spring Boot") String name,
 			Model model) {
@@ -18,7 +19,7 @@ public class WelcomeController {
 		return "welcome";
 	}
 	
-	@RequestMapping(value="/welcome", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public String answer(
 			@RequestParam(value = "answer") String answer,
 			Model model) {
