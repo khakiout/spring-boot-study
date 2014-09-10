@@ -1,4 +1,6 @@
-package hello;
+package hello.controller;
+
+import hello.response.Greeting;
 
 import java.util.concurrent.atomic.AtomicLong;
 

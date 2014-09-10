@@ -1,4 +1,4 @@
-package hello;
+package hello.response;
 
 public class Greeting {
 
