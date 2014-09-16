@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task VIEW</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:if="${task != null}">
+	    <div th:text="'Task ID: ' + ${task.id}" ></div>
+		<div th:text="'Task Title: ' + ${task.title}"></div>
+		<div th:text="'Task Status: ' + ${task.status}"></div>
+		<div th:text="'Task Description: ' + ${task.description}"></div>
+		<div th:text="'Date Created: ' + ${task.dateCreated}"></div>
+		<div th:text="'Date Modified: ' + ${task.dateUpdated}"></div>
+	</div>
+	<div th:if="${task == null}">
+		There is no task with ID: <span th:text="${id}"></span>
+	</div>
+</body>
+</html>
