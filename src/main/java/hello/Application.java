@@ -1,6 +1,7 @@
 package hello;
 
-import java.util.Arrays;
+import hello.entity.Task;
+import hello.repository.TaskRepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,6 +16,18 @@ public class Application {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(Application.class, args);
+		TaskRepository taskRepository = context.getBean(TaskRepository.class);
+		
+		taskRepository.save(new Task("Task 1", "Task 1 description"));
+		taskRepository.save(new Task("Task 2", "Task 2 description"));
+		
+		Iterable<Task> tasks = taskRepository.findAll();
+		System.out.println("Tasks found with findAll()");
+		System.out.println("-------------------------------");
+        for (Task task : tasks) {
+            System.out.println(task.getTitle() + " - " + task.getId());
+        }
+		
 		/*
 		System.out.println("Let's inspect the beans provided by Spring Boot.");
 
