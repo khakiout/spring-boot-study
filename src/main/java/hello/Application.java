@@ -20,6 +20,7 @@ public class Application {
 		
 		taskRepository.save(new Task("Task 1", "Task 1 description"));
 		taskRepository.save(new Task("Task 2", "Task 2 description"));
+		taskRepository.save(new Task("Case", "Task with case title"));
 		
 		Iterable<Task> tasks = taskRepository.findAll();
 		System.out.println("Tasks found with findAll()");
@@ -27,6 +28,11 @@ public class Application {
         for (Task task : tasks) {
             System.out.println(task.getTitle() + " - " + task.getId());
         }
+        
+        Task taskWithTitleCase = taskRepository.findByTitleAllIgnoringCase("case");
+        System.out.println("Tasks found with findByTitleAllIgnoringCase()");
+		System.out.println("-------------------------------");
+        System.out.println(taskWithTitleCase.getTitle() + " - " + taskWithTitleCase.getId());
 		
 		/*
 		System.out.println("Let's inspect the beans provided by Spring Boot.");
