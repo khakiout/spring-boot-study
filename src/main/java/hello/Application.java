@@ -1,6 +1,7 @@
 package hello;
 
 import hello.entity.Task;
+import hello.entity.TaskStatus;
 import hello.repository.TaskRepository;
 
 import org.springframework.boot.SpringApplication;
@@ -26,13 +27,21 @@ public class Application {
 		System.out.println("Tasks found with findAll()");
 		System.out.println("-------------------------------");
         for (Task task : tasks) {
-            System.out.println(task.getTitle() + " - " + task.getId());
+            logTaskDetails(task);
         }
         
         Task taskWithTitleCase = taskRepository.findByTitleAllIgnoringCase("case");
         System.out.println("Tasks found with findByTitleAllIgnoringCase()");
 		System.out.println("-------------------------------");
-        System.out.println(taskWithTitleCase.getTitle() + " - " + taskWithTitleCase.getId());
+        logTaskDetails(taskWithTitleCase);
+        
+        System.out.println("Updating \"Case\" task status to DONE.");
+        taskWithTitleCase.setStatus(TaskStatus.DONE);
+        taskRepository.save(taskWithTitleCase);
+        taskWithTitleCase = taskRepository.findByTitleAllIgnoringCase("case");
+        System.out.println("Tasks found with findByTitleAllIgnoringCase()");
+		System.out.println("-------------------------------");
+        logTaskDetails(taskWithTitleCase);
 		
 		/*
 		System.out.println("Let's inspect the beans provided by Spring Boot.");
@@ -43,6 +52,10 @@ public class Application {
 			System.out.println(beanName);
 		}
 		*/
+	}
+
+	private static void logTaskDetails(Task task) {
+		System.out.println(task.getTitle() + " - " + task.getId() + ", " + task.getStatus());
 	}
 
 }

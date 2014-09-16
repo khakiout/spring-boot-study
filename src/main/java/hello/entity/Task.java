@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
@@ -19,6 +21,8 @@ public class Task implements Serializable {
 	private String description;
 	private Date dateCreated;
 	private Date dateUpdated;
+	@Enumerated(EnumType.STRING)
+	private TaskStatus status;
 
 	protected Task() {
 	}
@@ -26,6 +30,7 @@ public class Task implements Serializable {
 	public Task(String title, String description) {
 		this.title = title;
 		this.description = description;
+		this.status = TaskStatus.TODO;
 	}
 
 	@PrePersist
@@ -68,6 +73,14 @@ public class Task implements Serializable {
 	
 	public Date getDateUpdated() {
 		return dateUpdated;
+	}
+
+	public TaskStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(TaskStatus status) {
+		this.status = status;
 	}
 
 }
